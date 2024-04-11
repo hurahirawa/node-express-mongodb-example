@@ -32,9 +32,6 @@ async function createUser(name, email, password) {
   });
 }
 
-
-
-
 /**
  * Update existing user
  * @param {string} id - User ID
@@ -76,13 +73,13 @@ async function checkEma(email) {
 
 /**
  * ganti pasword
- * @param {string} id 
- * @param {string} oldPassword 
+ * @param {string} id
+ * @param {string} oPass
  * @param {string} nPass
  * @returns {Promise}
  */
 
-async function cPass(id, nPass){
+async function cPass(id, nPass) {
   const user = await User.findById(id);
 
   if (!user) {

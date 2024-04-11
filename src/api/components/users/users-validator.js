@@ -17,12 +17,12 @@ module.exports = {
     },
   },
 
-  cPass:{
-    body:{
+  cPass: {
+    body: {
       email: joi.string().email().required().label('Email'),
-      oldPassword: joi.string().min(6).max(32).required().label('oldPassword'),
+      oPass: joi.string().min(6).max(32).required().label('oPass'),
       nPass: joi.string().min(6).max(32).required().label('nPass'),
       passConf: joi.string().min(6).max(32).required().label('passConf'),
-    }
-  }
+    },
+  },
 };

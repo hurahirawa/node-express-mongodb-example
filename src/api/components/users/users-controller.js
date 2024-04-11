@@ -64,7 +64,7 @@ async function createUser(request, response, next) {
     if (emailEst) {
       throw errorResponder(
         errorTypes.EMAIL_ALREADY_TAKEN,
-        'faq i hate bryan'
+        'Try To Create a New Email'
       );
     }
 
@@ -97,10 +97,7 @@ async function updateUser(request, response, next) {
 
     const emailExists = await usersService.checkEmailExists(email);
     if (emailExists) {
-      throw errorResponder(
-        errorTypes.EMAIL_ALREADY_TAKEN,
-        ''
-      );
+      throw errorResponder(errorTypes.EMAIL_ALREADY_TAKEN, '');
     }
 
     const success = await usersService.updateUser(id, name, email);
@@ -153,7 +150,7 @@ async function cPass(request, response, next) {
   try {
     const id = request.params.id;
     const email = request.body.email;
-    const oldPassword = request.body.oldPassword;
+    const oPass = request.body.oPass;
     const nPass = request.body.nPass;
     const passConf = request.body.passConf;
 
@@ -165,20 +162,20 @@ async function cPass(request, response, next) {
     }
 
     const loginSuccess = await authenticationServices.checkLoginCredentials(
-      email, 
-      oldPassword
+      email,
+      oPass
     );
-  
-    if(!loginSuccess) {
+
+    if (!loginSuccess) {
       throw errorResponder(
         errorTypes.INVALID_CREDENTIALS,
-        'Email atau Password salah'
-      )
+        'Wrong Email Or Password'
+      );
     }
-  
-    await usersService.cPass(id, oldPassword, nPass, passConf);
 
-    return response.status(200).json({ message: 'password berhasil diganti' });
+    await usersService.cPass(id, oPass, nPass, passConf);
+
+    return response.status(200).json({ message: 'Password Change Sucess' });
   } catch (error) {
     return next(error);
   }
